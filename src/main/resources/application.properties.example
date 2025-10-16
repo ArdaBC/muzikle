@@ -1,0 +1,3 @@
+spring.application.name=muzikle
+
+app.message=Hello from application.properties!
