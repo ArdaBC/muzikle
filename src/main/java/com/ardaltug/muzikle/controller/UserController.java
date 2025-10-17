@@ -21,7 +21,6 @@ public class UserController {
     // Async send
     /**
      * Accepts JSON body with User, and produces it to Kafka asynchronously.
-     * Example POST body:
      * {
      *   "id": "user123",
      *   "name": "Alice",

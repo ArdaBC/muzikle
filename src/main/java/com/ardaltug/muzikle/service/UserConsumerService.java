@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 import com.ardaltug.muzikle.avro.UserAvro;
 import com.ardaltug.muzikle.model.User;
-import com.ardaltug.muzikle.repository.UserRepository; // Your Avro generated class
+import com.ardaltug.muzikle.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -36,9 +36,9 @@ public class UserConsumerService {
 
             // Map Avro to JPA entity
             User user = new User();
-            user.setId(userAvro.getId().toString());
-                    user.setName(userAvro.getName().toString());
-                    user.setPassword(userAvro.getPassword().toString());
+            user.setId(userAvro.getId());
+                    user.setName(userAvro.getName());
+                    user.setPassword(userAvro.getPassword());
                     // Use helper function for date conversion
                     user.setSignUpDate(convertInstantToLocalDateTime(userAvro.getSignUpDate()));
                     user.setLoginDate(convertInstantToLocalDateTime(userAvro.getLoginDate()));

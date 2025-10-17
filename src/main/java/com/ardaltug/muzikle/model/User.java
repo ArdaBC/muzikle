@@ -28,7 +28,7 @@ public class User {
     @Column(name = "name", nullable = false, length = 200)
     private String name;
 
-    // In production, store password properly (hashed, salted) — do NOT store plain text in DB.
+    // To be hashed and salted
     @Column(name = "password", nullable = false, length = 200)
     private String password;
 

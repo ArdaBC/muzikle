@@ -2,7 +2,32 @@ spring.application.name=muzikle
 
 app.message=Hello from application.properties!
 
+
+#Producer User
 kafka.producers.user.bootstrap-servers=localhost:9092
 kafka.producers.user.topic=user-events
 kafka.producers.user.batch-size=16384
 kafka.producers.user.linger-ms=5
+
+
+# Consumer settings (if using KafkaProperties consumers map)
+kafka.consumers.user.bootstrap-servers=localhost:9092
+kafka.consumers.user.group-id=user-consumer-group
+kafka.consumers.user.topic=user-events
+
+# Confluent Schema Registry (adjust URL)
+kafka.schema-registry.url=http://localhost:8081
+
+
+
+# Spring JPA / MySQL (for local dev)
+spring.datasource.url=jdbc:mysql://localhost:3306/muzikle?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+spring.datasource.username=muzikle
+spring.datasource.password=muziklepass
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=false
+spring.jpa.properties.hibernate.format_sql=false
+
+# Kafka consumer settings
+kafka.bootstrap-servers=localhost:9092
+kafka.consumer.user.group-id=user-consumer-group
