@@ -1,16 +1,17 @@
 package com.ardaltug.muzikle.config;
 
-import lombok.RequiredArgsConstructor;
+import java.util.Properties;
+
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
+import com.ardaltug.muzikle.avro.UserAvro;
+
+import io.confluent.kafka.serializers.KafkaAvroSerializer;
+import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
@@ -19,7 +20,7 @@ public class KafkaProducerConfig {
     private final KafkaProperties kafkaProperties;
 
     @Bean(name = "userProducer", destroyMethod = "close")
-    public KafkaProducer<String, String> userProducer() {
+    public KafkaProducer<String, UserAvro> userProducer() {
         return createProducer(kafkaProperties.getProducers().get("user"));
     }
 
@@ -30,11 +31,14 @@ public class KafkaProducerConfig {
     }
     */
 
-    private KafkaProducer<String, String> createProducer(KafkaProperties.ProducerSettings settings) {
+    private KafkaProducer<String, UserAvro> createProducer(KafkaProperties.ProducerSettings settings) {
         Properties props = new Properties();
         props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, settings.getBootstrapServers());
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        //Kafka Avro Part
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, KafkaAvroSerializer.class.getName());
+        props.put("schema.registry.url", "http://localhost:8081"); // your schema registry
+        //Kafka Avro End
         props.put(ProducerConfig.ACKS_CONFIG, settings.getAcks());
         props.put(ProducerConfig.ENABLE_IDEMPOTENCE_CONFIG, Boolean.toString(settings.isIdempotence()));
         props.put(ProducerConfig.RETRIES_CONFIG, Integer.toString(settings.getRetries()));

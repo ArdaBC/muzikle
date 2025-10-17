@@ -1,0 +1,12 @@
+{
+  "type": "record",
+  "name": "UserAvro",
+  "namespace": "com.ardaltug.muzikle.avro",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "name", "type": "string" },
+    { "name": "password", "type": "string" },
+    { "name": "signUpDate", "type": ["null", { "type": "long", "logicalType": "timestamp-millis" }], "default": null },
+    { "name": "loginDate", "type": ["null", { "type": "long", "logicalType": "timestamp-millis" }], "default": null }
+  ]
+}
