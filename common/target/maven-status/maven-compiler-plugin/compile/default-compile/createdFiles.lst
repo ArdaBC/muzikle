@@ -1,1 +1,2 @@
-com\ardaltug\Main.class
+com\ardaltug\common\avro\UserAvro.class
+com\ardaltug\common\avro\UserAvro$Builder.class

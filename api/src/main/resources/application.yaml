@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: muzikle-api
+
+kafka:
+  producers:
+    user:
+      bootstrapServers: localhost:9092
+      topic: user-events
+      batchSize: 16384
+      lingerMs: 5
+      acks: all
+      retries: 3
+
+  schema-registry:
+    url: http://localhost:8081

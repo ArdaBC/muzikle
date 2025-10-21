@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: muzikle-consumer
+
+kafka:
+  consumers:
+    user:
+      bootstrapServers: localhost:9092
+      topic: user-events
+      groupId: user-consumer-group
+      concurrency: 1
+      maxPollRecords: 500
+      autoOffsetReset: earliest
+
+  schema-registry:
+    url: http://localhost:8081

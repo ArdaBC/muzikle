@@ -1,0 +1,10 @@
+{
+  "type": "record",
+  "name": "UserAvro",
+  "namespace": "com.ardaltug.common.avro",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "name", "type": "string" },
+    { "name": "password", "type": "string" }
+  ]
+}
