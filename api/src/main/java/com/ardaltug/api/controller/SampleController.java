@@ -1,21 +1,18 @@
 package com.ardaltug.api.controller;
 
-import com.ardaltug.api.config.ProducerFactory;
-import com.ardaltug.common.avro.UserAvro;
-
-import java.time.Instant;
-
-import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.ardaltug.api.service.SampleService;
+import com.ardaltug.common.avro.UserAvro;
 
 @RestController
 public class SampleController {
 
-    private final ProducerFactory producerFactory;
+    private final SampleService sampleService; // ✅ add this
 
-    public SampleController(ProducerFactory producerFactory) {
-        this.producerFactory = producerFactory;
+    public SampleController(SampleService sampleService) { // ✅ constructor injection
+        this.sampleService = sampleService;
     }
 
     @GetMapping("/hello")
@@ -25,18 +22,13 @@ public class SampleController {
 
     @GetMapping("/send-sample")
     public String sendSampleMessage() {
-        // Create a Kafka producer for the "user" producer defined in application.yaml
-        KafkaTemplate<String, UserAvro> kafkaTemplate = producerFactory.createProducer("user");
 
-         UserAvro user = UserAvro.newBuilder()
-                .setId("1")
-                .setName("Arda")
-                .setPassword("secret")  // Ideally passwords should be hashed
-                .build();
-
-        // Send to topic defined in KafkaConfigProperties
-        kafkaTemplate.send("user-events", user);
-
-        return "Message sent to Kafka!";
+            UserAvro aaaa = UserAvro.newBuilder()
+            .setId("3131")
+            .setName("Arda")
+            .setPassword("secret")
+            .build();
+            sampleService.send(aaaa);
+        return "Message sent at " + java.time.LocalDateTime.now();
     }
 }
