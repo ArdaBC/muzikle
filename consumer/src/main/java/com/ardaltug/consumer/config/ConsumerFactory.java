@@ -1,14 +1,15 @@
 package com.ardaltug.consumer.config;
 
-import io.confluent.kafka.serializers.KafkaAvroDeserializer;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
-import java.util.Map;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 
 @Component
 public class ConsumerFactory {
